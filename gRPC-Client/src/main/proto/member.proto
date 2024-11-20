@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpcclient.member"; // 생성될 Java 파일의 패키지 이름
+option java_outer_classname = "MemberServiceProto"; // 생성될 Java 파일의 클래스 이름
+
+// gRPC 서비스 정의
+service MemberService {
+  // 회원 정보 조회 메서드
+  rpc GetMember (MemberRequest) returns (MemberResponse);
+
+  // 회원 생성 메서드
+  rpc SignupMember (MemberSignupRequest) returns (MemberResponse);
+}
+
+// 요청 메시지: 회원 정보 조회
+message MemberRequest {
+  int64 memberId = 1; // 회원 ID
+}
+
+// 응답 메시지: 회원 정보
+message MemberResponse {
+  int64 memberId = 1; // 회원 ID (Long 타입)
+  string email = 2; // 회원 이메일
+  string name = 3;
+}
+
+// 요청 메시지: 회원 생성
+message MemberSignupRequest {
+  string email = 1; // 회원 이메일
+  string password = 2; // 회원 패스워드
+  string name = 3; // 회원 이름
+}
+
