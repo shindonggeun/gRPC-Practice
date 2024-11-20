@@ -1,5 +1,5 @@
 buildscript {
-    // 24.07.21 기준 최신 버전
+    // 24.11.20 기준 최신 버전
     ext {
         protobufVersion = '4.28.2'
         protobufPluginVersion = '0.9.4'
@@ -44,13 +44,12 @@ dependencies {
     implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
 
     // gRPC Client
-    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE' // Spring Boot와 gRPC의 통합을 간편하게 도와주는 스타터
+    implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE' // Spring Boot와 gRPC의 통합을 간편하게 도와주는 스타터 (gRPC Client)
     implementation "io.grpc:grpc-netty-shaded:${grpcVersion}" // Netty Shaded 사용(gRPC 서버와 클라이언트의 Netty 전송 계층을 제공)
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"     // Protobuf 메시지와 gRPC의 통합을 지원
     implementation "io.grpc:grpc-stub:${grpcVersion}"         // gRPC 클라이언트 스텁을 생성
-
-
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'    // 이걸 추가해야 gRPC 컴파일시 javax 어노테이션 오류가 발생하지 않는다.
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
