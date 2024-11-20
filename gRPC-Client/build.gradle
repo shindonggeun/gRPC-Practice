@@ -1,7 +1,7 @@
 buildscript {
     // 24.07.21 기준 최신 버전
     ext {
-        protobufVersion = '4.27.2'
+        protobufVersion = '4.28.2'
         protobufPluginVersion = '0.9.4'
         grpcVersion = '1.65.1'
     }
@@ -37,6 +37,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // grpc 프로토콜 버터를 사용하기 위한 핵심 라이브러리 (Protobuf 메시지의 직렬화 및 역직렬화를 지원합니다.)
     implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
