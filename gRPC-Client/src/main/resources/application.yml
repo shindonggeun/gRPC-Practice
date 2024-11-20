@@ -1,0 +1,5 @@
+grpc:
+  client:
+    member-service:
+      address: "localhost:50051" # gRPC 서버의 주소
+      enable-keep-alive: true
