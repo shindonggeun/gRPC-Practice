@@ -1,7 +1,6 @@
 package com.example.grpcclient.member.controller;
 
-import com.example.grpcclient.member.MemberServiceProto.MemberResponse;
-import com.example.grpcclient.member.MemberServiceProto.MemberSignupRequest;
+import com.example.grpcclient.member.MemberProto.MemberSignupRequestProto;
 import com.example.grpcclient.member.service.MemberGrpcClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +18,13 @@ public class MemberController {
     private final MemberGrpcClientService memberGrpcClientService;
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<MemberResponse> getMember(@PathVariable("memberId") Long memberId) {
-        return ResponseEntity.ok(memberGrpcClientService.getMember(memberId));
+    public ResponseEntity<String> getMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok(memberGrpcClientService.getMember(memberId).getEmail());
     }
 
     @PostMapping
-    public ResponseEntity<MemberResponse> signupMember(MemberSignupRequest signupRequest) {
-        return ResponseEntity.ok(memberGrpcClientService.signupMember(signupRequest));
+    public ResponseEntity<String> signupMember(MemberSignupRequestProto signupRequest) {
+        return ResponseEntity.ok(memberGrpcClientService.signupMember(signupRequest).getEmail());
     }
 
 }

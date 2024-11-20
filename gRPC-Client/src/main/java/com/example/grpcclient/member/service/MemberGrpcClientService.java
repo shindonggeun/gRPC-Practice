@@ -1,11 +1,11 @@
 package com.example.grpcclient.member.service;
 
-import com.example.grpcclient.member.MemberServiceProto.MemberResponse;
-import com.example.grpcclient.member.MemberServiceProto.MemberSignupRequest;
+
+import com.example.grpcclient.member.MemberProto;
 
 public interface MemberGrpcClientService {
 
-    MemberResponse getMember(Long memberId);
+    MemberProto.MemberResponseProto getMember(Long memberId);
 
-    MemberResponse signupMember(MemberSignupRequest signupRequest);
+    MemberProto.MemberResponseProto signupMember(MemberProto.MemberSignupRequestProto signupRequest);
 }

@@ -1,12 +1,12 @@
 package com.example.grpcclient.member.service;
 
+import com.example.grpcclient.member.MemberProto;
 import com.example.grpcclient.member.MemberServiceGrpc;
-import com.example.grpcclient.member.MemberServiceProto.MemberRequest;
-import com.example.grpcclient.member.MemberServiceProto.MemberResponse;
-import com.example.grpcclient.member.MemberServiceProto.MemberSignupRequest;
+import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class MemberGrpcClientServiceImpl implements MemberGrpcClientService {
 
@@ -14,18 +14,26 @@ public class MemberGrpcClientServiceImpl implements MemberGrpcClientService {
     private MemberServiceGrpc.MemberServiceBlockingStub memberServiceBlockingStub;
 
     @Override
-    public MemberResponse getMember(Long memberId) {
-        MemberRequest request = MemberRequest.newBuilder()
+    public MemberProto.MemberResponseProto getMember(Long memberId) {
+        MemberProto.MemberRequestProto request = MemberProto.MemberRequestProto.newBuilder()
             .setMemberId(memberId)
             .build();
 
+        MemberProto.MemberResponseProto memberResponse = memberServiceBlockingStub.getMember(request);
+
+        log.info(memberResponse.toString());
+
         // gRPC 서버 호출
-        return memberServiceBlockingStub.getMember(request);
+        return memberResponse;
     }
 
     @Override
-    public MemberResponse signupMember(MemberSignupRequest signupRequest) {
-        // gRPC 서버 호출
-        return memberServiceBlockingStub.signupMember(signupRequest);
+    public MemberProto.MemberResponseProto signupMember(MemberProto.MemberSignupRequestProto signupRequest) {
+        MemberProto.MemberResponseProto memberResponse = memberServiceBlockingStub.signupMember(signupRequest);
+
+        log.info(memberResponse.toString());
+
+        return memberResponse;
     }
+
 }
