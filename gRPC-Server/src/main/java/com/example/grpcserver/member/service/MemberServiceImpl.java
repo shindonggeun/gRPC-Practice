@@ -18,7 +18,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member getMember(Long memberId) {
-        return null;
+        return memberRepository.findById(memberId)
+            .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
     }
 
     @Override
